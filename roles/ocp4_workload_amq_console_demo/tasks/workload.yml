@@ -3,3 +3,5 @@
 - name: Install OpenShift Gitops
   ansible.builtin.include_tasks: openshift_gitops.yml
 
+- name: Install RHBK
+  ansible.builtin.include_tasks: keycloak.yml

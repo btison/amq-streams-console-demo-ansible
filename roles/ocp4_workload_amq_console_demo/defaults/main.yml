@@ -130,3 +130,32 @@ ocp4_workload_amq_console_demo_openshift_gitops_resource_customizations: |
   #     return hs
 
 ocp4_workload_amq_console_demo_openshift_gitops_ignore_differences: {}
+
+# ------------------------------------------------
+# Red Hat Build Of Keycloak
+# ------------------------------------------------
+
+ocp4_workload_amq_console_demo_rhbk_application_namespace: openshift-gitops
+ocp4_workload_amq_console_demo_rhbk_application_name: keycloak
+ocp4_workload_amq_console_demo_rhbk_namespace: keycloak
+ocp4_workload_amq_console_demo_rhbk_gitops_repo: https://github.com/btison/amq-streams-console-demo-helm.git
+ocp4_workload_amq_console_demo_rhbk_gitops_repo_tag: main
+ocp4_workload_amq_console_demo_rhbk_gitops_repo_path: keycloak
+
+ocp4_workload_amq_console_demo_rhbk_cr_name: keycloak
+ocp4_workload_amq_console_demo_rhbk_external_access: false
+ocp4_workload_amq_console_demo_rhbk_host: sso
+ocp4_workload_amq_console_demo_rhbk_max_time_to_wait: 600000
+
+ocp4_workload_amq_console_demo_rhbk_realm_amqstreams_console_name: amqstreams-console
+ocp4_workload_amq_console_demo_rhbk_client_amqstreams_console_name: amqstreams-console
+ocp4_workload_amq_console_demo_rhbk_client_amqstreams_console_secret:
+  "{{ lookup('ansible.builtin.password', '/tmp/passwordfile-client-amqstreams-console', chars=['ascii_letters', 'digits'], length=32) }}"
+
+ocp4_workload_amq_console_demo_rhbk_realm_amqstreams_name: amqstreams
+ocp4_workload_amq_console_demo_rhbk_client_amqstreams_name: amqstreams-admin
+ocp4_workload_amq_console_demo_rhbk_client_amqstreams_secret:
+  "{{ lookup('ansible.builtin.password', '/tmp/passwordfile-client-amqstreams', chars=['ascii_letters', 'digits'], length=32) }}"
+
+ocp4_workload_amq_console_demo_rhbk_user_password: "console"
+
