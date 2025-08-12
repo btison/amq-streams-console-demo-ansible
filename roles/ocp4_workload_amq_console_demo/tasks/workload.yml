@@ -12,5 +12,8 @@
 - name: Install AMQ Streams
   ansible.builtin.include_tasks: amq_streams.yml
 
-- name: install Globex app
+- name: Install Globex app
   ansible.builtin.include_tasks: globex.yml
+
+- name: Install Datagen apps
+  ansible.builtin.include_tasks: datagen.yml 
