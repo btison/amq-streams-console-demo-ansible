@@ -34,6 +34,11 @@ spec:
           enabled: {{ ocp4_workload_amq_console_demo_amq_streams_1_broker_enabled }}
         kafka2:
           enabled: {{ ocp4_workload_amq_console_demo_amq_streams_2_broker_enabled }}
+        console:
+          oauth:
+            enabled: {{ ocp4_workload_amq_console_demo_amq_streams_console_oauth_enabled }}
+          anonymous:
+            enabled: {{ ocp4_workload_amq_console_demo_amq_streams_console_anonymous_enabled }}
 
         kafka-broker-1:
           namespace: {{ ocp4_workload_amq_console_demo_amq_streams_1_broker_namespace }}
@@ -80,6 +85,50 @@ spec:
               userNameClaim: preferred_username
               maxSecondsWithoutReauthentication: 3600 
               enablePlain: false
+        amq-streams-console-anonymous:
+          namespace: {{ ocp4_workload_amq_console_demo_amq_streams_console_anonymous_namespace }}
+          subdomain: {{ r_openshift_subdomain }}
+          kafka1:
+            name: {{ ocp4_workload_amq_console_demo_amq_streams_1_broker_name }}
+            namespace: {{ ocp4_workload_amq_console_demo_amq_streams_1_broker_namespace }}
+            authentication:
+              saslMechanism: {{ ocp4_workload_amq_console_demo_amq_streams_1_sasl_mechanism }}
+              securityProtocol: {{ ocp4_workload_amq_console_demo_amq_streams_1_security_protocol }}
+            authorization: simple
+          kafka2:
+            name: {{ ocp4_workload_amq_console_demo_amq_streams_2_broker_name }}
+            namespace: {{ ocp4_workload_amq_console_demo_amq_streams_2_broker_namespace }}
+            authentication:
+              saslMechanism: {{ ocp4_workload_amq_console_demo_amq_streams_2_sasl_mechanism }}
+              securityProtocol: {{ ocp4_workload_amq_console_demo_amq_streams_2_security_protocol }}
+              clientId: {{ ocp4_workload_amq_console_demo_amq_streams_2_client_id }}
+              clientSecret: {{ ocp4_workload_amq_console_demo_amq_streams_2_client_secret }}
+              tokenEndpointUri: https://{{ ocp4_workload_amq_console_demo_rhbk_host }}.{{ r_openshift_subdomain }}/realms/{{ ocp4_workload_amq_console_demo_rhbk_realm_amqstreams_name }}/protocol/openid-connect/token
+            authorization: simple
+        amq-streams-console-oauth:
+          namespace: {{ ocp4_workload_amq_console_demo_amq_streams_console_oauth_namespace }}
+          subdomain: {{ r_openshift_subdomain }}
+          kafka1:
+            name: {{ ocp4_workload_amq_console_demo_amq_streams_1_broker_name }}
+            namespace: {{ ocp4_workload_amq_console_demo_amq_streams_1_broker_namespace }}
+            authentication:
+              saslMechanism: {{ ocp4_workload_amq_console_demo_amq_streams_1_sasl_mechanism }}
+              securityProtocol: {{ ocp4_workload_amq_console_demo_amq_streams_1_security_protocol }}
+            authorization: simple
+          kafka2:
+            name: {{ ocp4_workload_amq_console_demo_amq_streams_2_broker_name }}
+            namespace: {{ ocp4_workload_amq_console_demo_amq_streams_2_broker_namespace }}
+            authentication:
+              saslMechanism: {{ ocp4_workload_amq_console_demo_amq_streams_2_sasl_mechanism }}
+              securityProtocol: {{ ocp4_workload_amq_console_demo_amq_streams_2_security_protocol }}
+              clientId: {{ ocp4_workload_amq_console_demo_amq_streams_2_client_id }}
+              clientSecret: {{ ocp4_workload_amq_console_demo_amq_streams_2_client_secret }}
+              tokenEndpointUri: https://{{ ocp4_workload_amq_console_demo_rhbk_host }}.{{ r_openshift_subdomain }}/realms/{{ ocp4_workload_amq_console_demo_rhbk_realm_amqstreams_name }}/protocol/openid-connect/token
+            authorization: simple
+          oidc:
+            authServerUrl: "https://{{ ocp4_workload_amq_console_demo_rhbk_host }}.{{ r_openshift_subdomain }}/realms/{{ ocp4_workload_amq_console_demo_rhbk_realm_amqstreams_console_name }}"
+            clientId: {{ ocp4_workload_amq_console_demo_rhbk_client_amqstreams_console_name }}
+            clientSecret: {{ ocp4_workload_amq_console_demo_rhbk_client_amqstreams_console_secret }}          
         kafka-topics-1:
           kafka:
             namespace: {{ ocp4_workload_amq_console_demo_amq_streams_1_broker_namespace }}
@@ -88,6 +137,18 @@ spec:
           kafka:
             namespace: {{ ocp4_workload_amq_console_demo_amq_streams_2_broker_namespace }}
             cluster: {{ ocp4_workload_amq_console_demo_amq_streams_2_broker_name }}
+        keycloak-realm-import-console-oauth:
+          namespace: {{ ocp4_workload_amq_console_demo_rhbk_namespace }}
+          keycloak:
+            name: {{ ocp4_workload_amq_console_demo_rhbk_cr_name }}
+          realm:
+            name: {{ ocp4_workload_amq_console_demo_rhbk_realm_amqstreams_console_name }}
+          client:
+            amqstreams:
+              name: {{ ocp4_workload_amq_console_demo_rhbk_client_amqstreams_console_name }}
+              secret: {{ ocp4_workload_amq_console_demo_rhbk_client_amqstreams_console_secret }}
+          users:
+            password: {{ ocp4_workload_amq_console_demo_rhbk_user_password }}
         keycloak-realm-import-amqstreams:
           namespace: {{ ocp4_workload_amq_console_demo_rhbk_namespace }}
           keycloak:
