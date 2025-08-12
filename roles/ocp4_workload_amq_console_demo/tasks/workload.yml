@@ -11,3 +11,6 @@
 
 - name: Install AMQ Streams
   ansible.builtin.include_tasks: amq_streams.yml
+
+- name: install Globex app
+  ansible.builtin.include_tasks: globex.yml

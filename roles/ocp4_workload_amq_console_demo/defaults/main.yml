@@ -192,3 +192,26 @@ ocp4_workload_amq_console_demo_amq_streams_console_anonymous_namespace: kafka-co
 
 ocp4_workload_amq_console_demo_amq_streams_console_oauth_enabled: true
 ocp4_workload_amq_console_demo_amq_streams_console_oauth_namespace: kafka-console-oauth
+
+# ------------------------------------------------
+# Globex
+# ------------------------------------------------
+
+ocp4_workload_amq_console_demo_globex_application_name: globex
+ocp4_workload_amq_console_demo_globex_application_namespace: openshift-gitops
+
+ocp4_workload_amq_console_demo_globex_namespace: globex
+
+ocp4_workload_amq_console_demo_globex_gitops_repo: https://github.com/btison/amq-streams-console-demo-helm.git
+ocp4_workload_amq_console_demo_globex_gitops_repo_tag: main
+ocp4_workload_amq_console_demo_globex_gitops_repo_path: globex
+
+ocp4_workload_amq_console_demo_globex_kafka_broker_namespace: "{{ ocp4_workload_amq_console_demo_amq_streams_1_broker_namespace }}"
+ocp4_workload_amq_console_demo_globex_kafka_broker_name: "{{ ocp4_workload_amq_console_demo_amq_streams_1_broker_name }}"
+ocp4_workload_amq_console_demo_globex_kafka_security_protocol: SASL_PLAINTEXT
+ocp4_workload_amq_console_demo_globex_kafka_sasl_mechanism: "{{ ocp4_workload_amq_console_demo_amq_streams_1_sasl_mechanism }}"
+ocp4_workload_amq_console_demo_globex_kafka_client_id: globex
+ocp4_workload_amq_console_demo_globex_kafka_client_secret: globex
+
+ocp4_workload_amq_console_demo_globex_sso_realm: globex
+ocp4_workload_amq_console_demo_globex_sso_client: globex-web-gateway
